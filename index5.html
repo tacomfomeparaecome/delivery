@@ -1,0 +1,109 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tá Com Fome </title>
+    <link rel="stylesheet" href="style.css">
+    
+
+</head>
+<body>
+  <div class="header">
+    <img id="logoImg" src="Figura1-transformed.png" alt="Logo" width="200">
+    <h1> Tá Com Fome </h1>
+    <button id="btnSair" class="hidden" onclick="logout()">Sair</button>
+    <button onclick="mostrarCardapio()" class="hidden" id="btnIrCardapio">Ir para o Cardápio</button>
+    <button onclick="compartilharCardapio()" class="hidden" id="btnCompartilhar">Compartilhar Cardápio</button>
+    <button onclick="mostrarPedidos()" class="hidden" id="btnPedidos">Pedidos</button>
+    
+</div>
+     <!-- Login -->
+     <div class="login" id="login">
+        <h2>Login</h2>
+        <label>Usuário</label>
+        <input type="text" id="usuario">
+        <label>Senha</label>
+        <input type="password" id="senha">
+        <button onclick="logar()">Entrar</button>
+    </div>
+    <!-- Admin -->
+    <div class="admin hidden" id="admin">
+        <h2>Logo da Hamburgueria</h2>
+        <input type="file" id="logoInput" accept="image/*">
+
+        <h2>Cadastro de Categoria</h2>
+        <input type="text" id="novaCategoria" placeholder="Nome da Categoria">
+        <button onclick="adicionarCategoria()">Adicionar Categoria</button>
+
+        <h2>Cadastro de Produto</h2>
+        <input type="text" id="nomeProduto" placeholder="Nome do Produto">
+        <input type="text" id="precoProduto" placeholder="Preço">
+        <textarea id="itensProduto" placeholder="Itens do produto (separados por vírgula)"></textarea>
+        <input type="file" id="imagemProduto" accept="image/*">
+        <select id="selectCategoria"></select>
+        <button onclick="adicionarProduto()">Adicionar Produto</button>
+
+        
+   
+        <button id="btn-excluir-produto" onclick="excluirProduto()">Excluir Produto</button>
+        <select id="select-produto">
+           <option value="">Selecione um produto</option>
+        </select>
+
+        <button id="btn-excluir-categoria" onclick="excluirCategoria()">Excluir Categoria</button>
+        <select id="select-categoria">
+           <option value="">Selecione uma categoria</option>
+           
+        </select>
+        
+     
+    
+    </div>
+
+    <!-- Cardápio -->
+    <div class="cardapio hidden" id="cardapio">
+        <h2>Cardápio</h2>
+        <div id="listaCardapio"></div>
+        <button onclick="mostrarCarrinho()">Finalizar Pedido</button>
+        <button onclick="voltarAdmin()">Voltar ao Admin</button>
+     
+    </div>
+
+    <!-- Carrinho Modal -->
+    <div class="carrinho-modal" id="carrinhoModal">
+        <h2>Resumo do Pedido</h2>
+        <div id="itensCarrinho"></div>
+        <h3>Forma de Pagamento</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="pagamento" value="dinheiro" onchange="toggleTroco()"> Dinheiro</label>
+            <label><input type="radio" name="pagamento" value="cartao" onchange="toggleTroco()"> Cartão</label>
+            <label><input type="radio" name="pagamento" value="pix" onchange="toggleTroco()"> PIX</label>
+        </div>
+        <input type="text" id="trocoPara" class="hidden" placeholder="Troco para quanto?">
+        <h3>Entrega ou Retirada</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="entregaRetirada" value="retirada" onchange="toggleEndereco()"> Retirada</label>
+            <label><input type="radio" name="entregaRetirada" value="entrega" onchange="toggleEndereco()"> Entrega</label>
+        </div>
+        <label for="nomeCliente">Nome do Cliente:</label>
+        <input type="text" id="nomeCliente" required>
+        <div id="enderecoCampos" class="hidden">
+            <input type="text" id="endereco" placeholder="Endereço">
+            <input type="text" id="bairro" placeholder="Bairro">
+            <input type="text" id="numero" placeholder="Número">
+        </div>
+        <button onclick="confirmarPedido()">Confirmar Pedido</button>
+        <button onclick="fecharCarrinho()">Fechar</button>
+    </div>
+
+ 
+    <div class="tela-pedidos hidden" id="telaPedidos">
+        <h2>Pedidos</h2>
+        <div id="listaPedidos"></div>
+        <button onclick="voltarAdminPedidos()">Voltar ao Admin</button>
+    </div>
+
+    <script src="script5.js"></script>
+    
+</body>
+</html>
