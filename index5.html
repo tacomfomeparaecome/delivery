@@ -1,109 +1,163 @@
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tá Com Fome </title>
-    <link rel="stylesheet" href="style.css">
-    
+<!DOCTYPE html>
+<html>
 
+<head>
+  <title>Seletor de Cor</title>
+  <link rel="stylesheet" href="style3.css">
 </head>
+
 <body>
   <div class="header">
     <img id="logoImg" src="Figura1-transformed.png" alt="Logo" width="200">
     <h1> Tá Com Fome </h1>
-    <button id="btnSair" class="hidden" onclick="logout()">Sair</button>
-    <button onclick="mostrarCardapio()" class="hidden" id="btnIrCardapio">Ir para o Cardápio</button>
-    <button onclick="compartilharCardapio()" class="hidden" id="btnCompartilhar">Compartilhar Cardápio</button>
-    <button onclick="mostrarPedidos()" class="hidden" id="btnPedidos">Pedidos</button>
+    <nav class="navegacao" id="navegacao" style="display: none;">
+      <button class="botao" id="cadastro-produto">Cadastro de produto </button>
+      <button onclick="compartilharCardapio()" id="btnCompartilhar">Compartilhar Cardápio</button>
+      <button class="botao" id="btn-configuracoes" onclick="abrirConfiguracoes()">Configurações</button>
+      <button onclick="mostrarCardapio()" id="btnIrCardapio">Ir para o Cardápio</button>
+      <button onclick="mostrarPedidosAdmin()">Pedidos</button>
+      <button id="btnSair" class="hidden" onclick="logout()">Sair</button>
+      
+    </nav>
+  </div>
+
+  <!-- Login -->
+  <div class="login" id="login">
+    <h2>Login</h2>
+    <label>Usuário</label>
+    <input type="text" id="usuario">
+    <label>Senha</label>
+    <input type="password" id="senha">
+
+    <button onclick="logar()">Entrar</button>
+  </div>
+
+  <!-- Admin -->
+  <div class="admin hidden" id="admin">
+    <h2>Logo da Hamburgueria</h2>
+    <input type="file" id="logoInput" accept="image/*">
+    <button id="btn-seletor-cor">Mudar cor de fundo</button>
+    <input type="color" id="seletor-cor" value="#ffffff" style="display: none;">
+    <button id="btn-mudar-cor-fonte">Mudar Cor Fonte</button>
+    <input type="color" id="seletor-cor-fonte" value="#000000" style="display: none;">
+
+    <button id="btn-mudar-fonte">Mudar Fonte</button>
+    <select id="seletor-fonte" style="display: none;">
+      <option value="Arial">Arial</option>
+      <option value="Times New Roman">Times New Roman</option>
+      <option value="Courier New">Courier New</option>
+      <option value="Verdana">Verdana</option>
+      <option value="Comic Sans MS">Comic Sans MS</option>
+      <option value="Calibri">Calibri</option>
+      <option value="Cambria">Cambria</option>
+      <option value="Candara">Candara</option>
+      <option value="Consolas">Consolas</option>
+      <option value="Constantia">Constantia</option>
+      <option value="Corbel">Corbel</option>
+      <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
+      <option value="Gabriola">Gabriola</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Impact">Impact</option>
+      <option value="Lucida Console">Lucida Console</option>
+      <option value="Lucida Sans">Lucida Sans</option>
+      <option value="Microsoft Sans Serif">Microsoft Sans Serif</option>
+      <option value="Palatino Linotype">Palatino Linotype</option>
+      <option value="Papyrus">Papyrus</option>
+      <option value="Segoe Script">Segoe Script</option>
+      <option value="Segoe UI">Segoe UI</option>
+      <option value="Tahoma">Tahoma</option>
+      <option value="Trebuchet MS">Trebuchet MS</option>
+      <option value="Rockwell">Rockwell</option>
+    </select>
+    <button id="btn-mudar-cor-botoes">Mudar Cor Botões</button>
+    <input type="color" id="seletor-cor-botoes" value="#000000" style="display: none;">
     
-</div>
-     <!-- Login -->
-     <div class="login" id="login">
-        <h2>Login</h2>
-        <label>Usuário</label>
-        <input type="text" id="usuario">
-        <label>Senha</label>
-        <input type="password" id="senha">
-        <button onclick="logar()">Entrar</button>
-    </div>
-    <!-- Admin -->
-    <div class="admin hidden" id="admin">
-        <h2>Logo da Hamburgueria</h2>
-        <input type="file" id="logoInput" accept="image/*">
 
-        <h2>Cadastro de Categoria</h2>
-        <input type="text" id="novaCategoria" placeholder="Nome da Categoria">
-        <button onclick="adicionarCategoria()">Adicionar Categoria</button>
+     </div>
 
-        <h2>Cadastro de Produto</h2>
-        <input type="text" id="nomeProduto" placeholder="Nome do Produto">
-        <input type="text" id="precoProduto" placeholder="Preço">
-        <textarea id="itensProduto" placeholder="Itens do produto (separados por vírgula)"></textarea>
-        <input type="file" id="imagemProduto" accept="image/*">
-        <select id="selectCategoria"></select>
-        <button onclick="adicionarProduto()">Adicionar Produto</button>
+  <div class="cadastro-produto hidden">
+    <h2>Cadastro de Categoria</h2>
+    <input type="text" id="novaCategoria" placeholder="Nome da Categoria">
+    <button onclick="adicionarCategoria()">Adicionar Categoria</button>
 
-        
+    <h2>Cadastro de Produto</h2>
+    <input type="text" id="nomeProduto" placeholder="Nome do Produto">
+    <input type="text" id="precoProduto" placeholder="Preço">
+    <textarea id="itensProduto" placeholder="Itens do produto (separados por vírgula)"></textarea>
+    <input type="file" id="imagemProduto" accept="image/*">
+    <select id="selectCategoria"></select>
+    <button onclick="adicionarProduto()">Adicionar Produto</button>
+
+    <button id="btn-excluir-produto" onclick="excluirProduto()">Excluir Produto</button>
+    <select id="select-produto">
+      <option value="">Selecione um produto</option>
+    </select>
+
+    <button id="btn-excluir-categoria" onclick="excluirCategoria()">Excluir Categoria</button>
+    <select id="select-categoria">
+      <option value="">Selecione uma categoria</option>
+    </select>
+
    
-        <button id="btn-excluir-produto" onclick="excluirProduto()">Excluir Produto</button>
-        <select id="select-produto">
-           <option value="">Selecione um produto</option>
-        </select>
+    <button id="voltar-tela-navegacao" onclick="voltarParaTelaNavegacao()">Voltar para Tela de Navegação</button>
+  </div>
+</div>
 
-        <button id="btn-excluir-categoria" onclick="excluirCategoria()">Excluir Categoria</button>
-        <select id="select-categoria">
-           <option value="">Selecione uma categoria</option>
-           
-        </select>
-        
-     
-    
-    </div>
-
-    <!-- Cardápio -->
-    <div class="cardapio hidden" id="cardapio">
-        <h2>Cardápio</h2>
-        <div id="listaCardapio"></div>
-        <button onclick="mostrarCarrinho()">Finalizar Pedido</button>
-        <button onclick="voltarAdmin()">Voltar ao Admin</button>
-     
-    </div>
-
-    <!-- Carrinho Modal -->
-    <div class="carrinho-modal" id="carrinhoModal">
-        <h2>Resumo do Pedido</h2>
-        <div id="itensCarrinho"></div>
-        <h3>Forma de Pagamento</h3>
-        <div class="radio-group">
-            <label><input type="radio" name="pagamento" value="dinheiro" onchange="toggleTroco()"> Dinheiro</label>
-            <label><input type="radio" name="pagamento" value="cartao" onchange="toggleTroco()"> Cartão</label>
-            <label><input type="radio" name="pagamento" value="pix" onchange="toggleTroco()"> PIX</label>
-        </div>
-        <input type="text" id="trocoPara" class="hidden" placeholder="Troco para quanto?">
-        <h3>Entrega ou Retirada</h3>
-        <div class="radio-group">
-            <label><input type="radio" name="entregaRetirada" value="retirada" onchange="toggleEndereco()"> Retirada</label>
-            <label><input type="radio" name="entregaRetirada" value="entrega" onchange="toggleEndereco()"> Entrega</label>
-        </div>
-        <label for="nomeCliente">Nome do Cliente:</label>
-        <input type="text" id="nomeCliente" required>
-        <div id="enderecoCampos" class="hidden">
-            <input type="text" id="endereco" placeholder="Endereço">
-            <input type="text" id="bairro" placeholder="Bairro">
-            <input type="text" id="numero" placeholder="Número">
-        </div>
-        <button onclick="confirmarPedido()">Confirmar Pedido</button>
-        <button onclick="fecharCarrinho()">Fechar</button>
-    </div>
-
+<!-- Cardápio -->
+<div class="cardapio hidden" id="cardapio">
+    <h2>Cardápio</h2>
+    <div id="listaCardapio"></div>
+    <button onclick="mostrarCarrinho()">Finalizar Pedido</button>
+    <button onclick="voltarAdmin()">Voltar para Tela de Navegação</button>
  
-    <div class="tela-pedidos hidden" id="telaPedidos">
-        <h2>Pedidos</h2>
-        <div id="listaPedidos"></div>
-        <button onclick="voltarAdminPedidos()">Voltar ao Admin</button>
-    </div>
+</div>
 
-    <script src="script5.js"></script>
-    
+<!-- Carrinho Modal -->
+<div class="carrinho-modal" id="carrinhoModal">
+    <h2>Resumo do Pedido</h2>
+    <div id="itensCarrinho"></div>
+    <h3>Forma de Pagamento</h3>
+    <div class="radio-group">
+        <label><input type="radio" name="pagamento" value="dinheiro" onchange="toggleTroco()"> Dinheiro</label>
+        <label><input type="radio" name="pagamento" value="cartao" onchange="toggleTroco()"> Cartão</label>
+        <label><input type="radio" name="pagamento" value="pix" onchange="toggleTroco()"> PIX</label>
+    </div>
+    <input type="text" id="trocoPara" class="hidden" placeholder="Troco para quanto?">
+    <h3>Entrega ou Retirada</h3>
+    <div class="radio-group">
+        <label><input type="radio" name="entregaRetirada" value="retirada" onchange="toggleEndereco()"> Retirada</label>
+        <label><input type="radio" name="entregaRetirada" value="entrega" onchange="toggleEndereco()"> Entrega</label>
+    </div>
+    <label for="nomeCliente">Nome do Cliente:</label>
+    <input type="text" id="nomeCliente" required>
+    <div id="enderecoCampos" class="hidden">
+        <input type="text" id="endereco" placeholder="Endereço">
+        <input type="text" id="bairro" placeholder="Bairro">
+        <input type="text" id="numero" placeholder="Número">
+    </div>
+    <button onclick="confirmarPedido()">Confirmar Pedido</button>
+    <button onclick="fecharCarrinho()">Fechar</button>
+</div>
+
+
+<div id="telaPedidos" class="hidden">
+  <h2>Pedidos</h2>
+  <div id="listaPedidos"></div>
+  <button onclick="voltarAdminPedidos()">Voltar</button>
+</div>
+  
+  <script src="script3.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script>
+  const firebaseConfig = {
+    databaseURL: "https://delyvery-2b47e-default-rtdb.firebaseio.com/",
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+  const db = firebase.database();
+</script>
 </body>
+
 </html>
